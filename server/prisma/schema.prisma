@@ -1,0 +1,75 @@
+datasource postgres {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  createdAt DateTime @default(now())
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+model MenuItem {
+  createdAt      DateTime       @default(now())
+  description    String?
+  id             String         @id @default(cuid())
+  image          String?
+  isOutOfStock   Boolean        @default(false)
+  menuCategories MenuCategory[]
+  name           String?
+  price          Float?
+  sizes          Size[]
+  updatedAt      DateTime       @updatedAt
+}
+
+model Merchant {
+  createdAt DateTime @default(now())
+  email     String   @unique
+  id        String   @id @default(cuid())
+  logo      String
+  menus     Menu[]
+  name      String
+  updatedAt DateTime @updatedAt
+}
+
+model Menu {
+  createdAt      DateTime       @default(now())
+  id             String         @id @default(cuid())
+  isVisible      Boolean        @default(false)
+  menuCategories MenuCategory[]
+  merchant       Merchant?      @relation(fields: [merchantId], references: [id])
+  merchantId     String?
+  order          Float
+  title          String
+  updatedAt      DateTime       @updatedAt
+}
+
+model MenuCategory {
+  createdAt DateTime   @default(now())
+  id        String     @id @default(cuid())
+  isVisible Boolean    @default(false)
+  menu      Menu[]
+  menuItems MenuItem[]
+  title     String
+  updatedAt DateTime   @updatedAt
+}
+
+model Size {
+  createdAt   DateTime  @default(now())
+  description String?
+  id          String    @id @default(cuid())
+  menuItem    MenuItem? @relation(fields: [menuItemId], references: [id])
+  menuItemId  String?
+  name        String
+  price       Float
+  updatedAt   DateTime  @updatedAt
+}
