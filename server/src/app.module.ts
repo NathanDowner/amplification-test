@@ -2,10 +2,11 @@ import { Module, Scope } from "@nestjs/common";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
-import { OrderModule } from "./order/order.module";
-import { CustomerModule } from "./customer/customer.module";
-import { AddressModule } from "./address/address.module";
-import { ProductModule } from "./product/product.module";
+import { MenuItemModule } from "./menuItem/menuItem.module";
+import { MerchantModule } from "./merchant/merchant.module";
+import { MenuModule } from "./menu/menu.module";
+import { MenuCategoryModule } from "./menuCategory/menuCategory.module";
+import { SizeModule } from "./size/size.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -23,10 +24,11 @@ import { AuthModule } from "./auth/auth.module";
     ACLModule,
     AuthModule,
     UserModule,
-    OrderModule,
-    CustomerModule,
-    AddressModule,
-    ProductModule,
+    MenuItemModule,
+    MerchantModule,
+    MenuModule,
+    MenuCategoryModule,
+    SizeModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,
